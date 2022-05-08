@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container">
+  <div class="post">
+    <h2 th:text="${post.title}">Title</h2>
+    <h5 th:text="'Published on ' + ${#dates.format(post.creationDate, 'yyyy MMMM dd')}">Creation date and by who</h5>
+    <div class="img">Image</div>
+  </div>
+
+  <div class="comments">
+    <h2>Comments</h2>
+    <div class="comment" th:each="comment : ${post.comments}">
+      <h5 th:text="'Commented on ' + ${#dates.format(post.creationDate, 'yyyy-MM-dd')}">Comment date and by whom</h5>
+      <p th:text="${comment.description}">Description</p>
+    </div>
+  </div>
+
+  <h2>Write new comment</h2>
+
+  <form action="#"
+        th:action="@{'/comment'}"
+        th:object="${comment}"
+        method="post">
+    <label>
+      <div class="alert-red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+      <textarea th:field="*{description}" placeholder="Write something valuable"></textarea>
+    </label>
+    <div>
+    <button class="green-btn" type="submit">Send</button>
+    </div>
+    <input type="hidden" th:field="*{post.id}">
+  </form>
+</div>
+
+
+</div>
+
+</body>
+</html>
