@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <th:block th:fragment="footer_css">
+        <link th:href="@{/css/style8.css}" rel="stylesheet" />
+    </th:block>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <section>
+            <div th:fragment="comment">
+                <form action="#" th:action="@{'/comment'}" th:object="${comment}" method="post">
+                    <div class="container">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-6 col-12 pb-4">
+                            <div class="container">
+                                <div class="post">
+                                    <h2 th:text="${post.title}">Title</h2>
+                                    <h5 th:text="'Published on ' + ${#dates.format(post.creationDate, 'yyyy MMMM dd')}">
+                                        Creation date</h5>
+                                </div>
+
+
+                                <h2>Comments</h2>
+                                <div class="comment mt-4 text-justify float-left" th:each="comment : ${post.comments}">
+                                    <h5 th:text="'Commented on ' + ${#dates.format(post.creationDate, 'yyyy-MM-dd')}">
+                                        Comment date</h5>
+                                    <p th:text="${comment.description}">Description</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                            <form id="algin-form">
+                                <div class="form-group">
+                                    <h4>Leave a comment</h4>
+                                    <label for="message">Description</label>
+                                    <textarea name="description" id="description" th:field="*{description}" description
+                                        cols="30" rows="5" class="form-control"
+                                        style="background-color: black;"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" id="post">Post Comment</button>
+                                </div>
+                                <input type="hidden" th:field="*{post.id}">
+                            </form>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

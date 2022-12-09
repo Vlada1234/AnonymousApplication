@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{/css/postForm.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="overlay">
+        <form action="#"
+        th:action="@{/createNewPost}"
+        th:object="${post}"
+        method="post">
+
+            <h1> Create New Post</h1>
+
+             <label for="Title">Title:</label>
+             <input type="text" name="title" id="title" class="form-control" placeholder="Title" required="true" autofocus="true">
+             <small class="error"></small>
+
+             <label for="Description">Description:</label>
+             <textarea  name="description" id="description" class="form-control" placeholder="Description" required="true" rows="6"></textarea>
+             <small class="error"></small>
+
+             <div class="center">
+                 <input type="submit" value="Create Post">
+             </div>  
+
+        </form>
+    </div>
+    <script type="text/javascript" th:src="@{/js/script2.js}"></script>
+</body>
+</html>
